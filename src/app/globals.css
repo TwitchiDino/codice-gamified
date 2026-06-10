@@ -18,6 +18,105 @@
   }
 }
 
+@keyframes float-nebula {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(10px, -20px) scale(1.05);
+    opacity: 0.3;
+  }
+}
+
+@keyframes pulse-runes {
+  0%, 100% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.2));
+  }
+  50% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.7));
+  }
+}
+
+@keyframes drift-fog {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes blink-eyes {
+  0%, 95%, 100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+  97% {
+    transform: scaleY(0.1);
+    opacity: 0.8;
+  }
+  98% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes shift-fenda {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes collapse-nexus {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: blur(0px);
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    filter: blur(2px);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    filter: blur(0px);
+  }
+}
+
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
+}
+
+.animate-float-nebula {
+  animation: float-nebula 8s ease-in-out infinite;
+}
+
+.animate-pulse-runes {
+  animation: pulse-runes 4s ease-in-out infinite;
+}
+
+.animate-drift-fog {
+  background-size: 200% 200%;
+  animation: drift-fog 15s ease infinite;
+}
+
+.animate-blink-eyes {
+  animation: blink-eyes 12s infinite;
+}
+
+.animate-shift-fenda {
+  background-size: 300% 300%;
+  animation: shift-fenda 10s ease infinite;
+}
+
+.animate-collapse-nexus {
+  animation: collapse-nexus 6s ease-in-out infinite;
 }

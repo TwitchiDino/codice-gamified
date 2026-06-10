@@ -5,9 +5,6 @@ const TITLES = {
   1: "Aprendiz de Escriba",
   5: "Escriba Real",
   10: "Arquivista Cósmico",
-  20: "Mago Rúnico",
-  30: "Arquivista Divino",
-  50: "Arquivista Lendário"
 };
 
 function getTitleForLevel(level) {
