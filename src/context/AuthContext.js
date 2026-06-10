@@ -17,12 +17,22 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let unsubscribeSnapshot = null;
+
     const unsubscribeAuth = onAuthStateChanged(auth, (firebaseUser) => {
+      // Se houver uma escuta anterior do Firestore ativa, cancelamos
+      if (unsubscribeSnapshot) {
+        unsubscribeSnapshot();
+        unsubscribeSnapshot = null;
+      }
+
       setUser(firebaseUser);
 
       if (firebaseUser) {
         const userDocRef = doc(db, "users", firebaseUser.uid);
-        const unsubscribeSnapshot = onSnapshot(
+
+        // Escutando dados do perfil em tempo real de forma simples e segura
+        unsubscribeSnapshot = onSnapshot(
           userDocRef,
           (docSnap) => {
             if (docSnap.exists()) {
@@ -33,19 +43,23 @@ export function AuthProvider({ children }) {
             setLoading(false);
           },
           (error) => {
-            console.error("Erro ao escutar dados do perfil no Firestore:", error);
+            console.error("Erro ao escutar dados do perfil:", error);
+            // Mesmo que dê erro de permissão (ex: no cadastro intermediário), destravamos a tela
             setLoading(false);
           }
         );
-
-        return () => unsubscribeSnapshot();
       } else {
         setProfile(null);
         setLoading(false);
       }
     });
 
-    return () => unsubscribeAuth();
+    return () => {
+      unsubscribeAuth();
+      if (unsubscribeSnapshot) {
+        unsubscribeSnapshot();
+      }
+    };
   }, []);
 
   return (
